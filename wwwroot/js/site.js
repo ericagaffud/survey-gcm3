@@ -24,10 +24,27 @@ $('#survey').on('submit', function (e) {
     let question3 = $('#question3').val();
 
     var formData = {
-        question1: question1,
-        question2: question2,
-        question3: question3
+        Q1: question1,
+        Q2: question2,
+        Q3: question3
     };
 
     console.log(formData);
+
+    $.ajax({
+        url: "/Home/SaveSurveyAnswers",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(formData),
+        success: function (response) {
+            console.log("Saved Successfully", response);
+            Swal.fire("Working");
+            $('#question1').val('');
+            $('#question2').val('');
+            $('#question3').val('');
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
 });

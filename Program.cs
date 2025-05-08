@@ -1,4 +1,8 @@
+using SQLitePCL;
+
 var builder = WebApplication.CreateBuilder(args);
+
+Batteries.Init();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
