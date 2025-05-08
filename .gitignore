@@ -1,0 +1,15 @@
+*.zip
+obj
+bin
+packages
+*.mp4
+.svn
+.vs
+publish
+*.pubxml
+*.pubxml.user
+*.publishproj
+*.[Pp]ublish.xml
+/OmniBusiness/OmniBusiness.csproj.user
+
+.codegpt
