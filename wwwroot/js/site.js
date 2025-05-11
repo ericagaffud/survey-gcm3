@@ -4,7 +4,6 @@
 // Write your JavaScript code.
 
 $('#survey button').on('click', function () {
-    console.log();
     var questionContainer = $(this).closest('#survey > div');
 
     var className = questionContainer.attr('class');
@@ -14,6 +13,8 @@ $('#survey button').on('click', function () {
     var buttonNumber = buttonName.charAt(buttonName.length - 1);
 
     $('#' + questionNumber).val(buttonNumber);
+    $('.' + className + '> div > button').removeClass('button-active');
+    $('.' + className + '> div > button:nth-child(' + buttonNumber + ')').addClass('button-active');
 });
 
 $('#survey').on('submit', function (e) {
@@ -37,11 +38,15 @@ $('#survey').on('submit', function (e) {
         contentType: "application/json",
         data: JSON.stringify(formData),
         success: function (response) {
-            console.log("Saved Successfully", response);
-            Swal.fire("Working");
-            $('#question1').val('');
-            $('#question2').val('');
-            $('#question3').val('');
+            Swal.fire({
+                title: "SUBMITTED",
+                text: response.message,
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                $('#question1, #question2, #question3').val('');
+                $('#survey button').removeClass('button-active');
+            });
         },
         error: function (error) {
             console.log(error);
