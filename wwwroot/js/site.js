@@ -15,6 +15,10 @@ $('#survey button').on('click', function () {
     $('#' + questionNumber).val(buttonNumber);
     $('.' + className + '> div > button').removeClass('button-active');
     $('.' + className + '> div > button:nth-child(' + buttonNumber + ')').addClass('button-active');
+
+    if ($('#question1').val() != "" && $('#question2').val() != "" && $('#question3').val() != "") {
+        $('#submit').css('display', 'inline-block').animate({ opacity: 1 }, 500);
+    }
 });
 
 $('#survey').on('submit', function (e) {
@@ -46,6 +50,7 @@ $('#survey').on('submit', function (e) {
             }).then(() => {
                 $('#question1, #question2, #question3').val('');
                 $('#survey button').removeClass('button-active');
+                $('#submit').css("opacity", 0);
             });
         },
         error: function (error) {
